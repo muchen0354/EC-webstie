@@ -13,7 +13,7 @@ let HTMLPlugins = [];
 let Entries = {}
 
 // 生成多页面的集合
-config.HTMLDirs.forEach((page) => {
+config.pages.forEach((page) => {
     const htmlPlugin = new HTMLWebpackPlugin({
         filename: `${page}.html`,
         template: path.resolve(__dirname, `../app/html/${page}.html`),
@@ -35,7 +35,7 @@ module.exports = {
         rules:[
             {
                 // 对 css 后缀名进行处理
-                test:/\.css$/,
+                test:/\.scss$/,
                 // 不处理 node_modules 文件中的 css 文件
                 exclude: /node_modules/,
                 // 抽取 css 文件到单独的文件夹
@@ -51,7 +51,10 @@ module.exports = {
                         }
                     },
                         {
-                            loader:"postcss-loader",
+                            loader: "postcss-loader",
+                        },
+                        {
+                            loader: "sass-loader"
                         }
                     ]
                 })
